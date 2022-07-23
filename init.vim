@@ -45,8 +45,15 @@ set nobackup
 set noswapfile
 
 " line numbers and distances
-set relativenumber 
-set number 
+""set relativenumber 
+""set number 
+
+set nu
+augroup numbertoggle
+    autocmd!
+    autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+    autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+augroup END
 
 " number of lines offset when jumping
 set scrolloff=2
@@ -54,7 +61,7 @@ set scrolloff=2
 " Tab key enters 4 spaces
 " To enter a TAB character when `expandtab` is in effect,
 " CTRL-v-TAB
-set expandtab tabstop=4 shiftwidth=4 softtabstop=4 
+set expandtab tabstop=4 shiftwidth=4 softtabstop=4
 
 " Indent new line the same as the preceding line
 set autoindent
@@ -129,7 +136,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 
 " https://github.com/tpope/vim-vinegar
-Plug 'tpope/vim-vinegar'
+""Plug 'tpope/vim-vinegar'
 
 " https://github.com/APZelos/blamer.nvim
 Plug 'APZelos/blamer.nvim'
@@ -147,9 +154,11 @@ Plug 'scrooloose/nerdtree'
 call plug#end()
 
 syntax enable
-" Neovim only
-set termguicolors 
 
+" Neovim only
+if has('nvim')
+    set termguicolors
+endif
 " Light scheme
 "colorscheme night_owl_light
 
