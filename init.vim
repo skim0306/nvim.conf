@@ -150,10 +150,63 @@ Plug 'macguirerintoul/night_owl_light.vim'
 "Plug 'scrooloose/nerdtree', {'on': 'NerdTreeToggle'}
 Plug 'scrooloose/nerdtree'
 
+
+"Plug 'jalvesaq/Nvim-R'
+Plug 'ggandor/leap.nvim'
+
+Plug 'junegunn/fzf', {'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+
+Plug 'junegunn/vim-easy-align'
+
+Plug 'neoclide/coc.nvim', { 'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+
+
 " Initialize plugin system
 call plug#end()
 
 syntax enable
+
+
+"" For fzf search
+""nnoremap <silent> <C-f>     :Files<CR>
+nnoremap <silent> <Leader>f :Files<CR>
+nnoremap <silent> <Leader>g :Rg<CR>
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+"Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+"" coc settings from neoclide/coc.nvim
+set updatetime=300
+set signcolumn=yes
+
+
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+if has('nvim')
+    lua require('leap').add_default_mappings()
+endif
+
+
+
+
+
+
 
 " Neovim only
 if has('nvim')
