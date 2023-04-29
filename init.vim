@@ -83,7 +83,8 @@ set hlsearch incsearch ignorecase smartcase
 "set nowrap
 
 " http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
-set autochdir
+" TODO disabled
+"set autochdir
 
 " open new buffers without saving current modifications (buffer remain sopen)
 set hidden
@@ -167,7 +168,7 @@ Plug 'neoclide/coc.nvim', { 'branch': 'master', 'do': 'yarn install --frozen-loc
 call plug#end()
 
 syntax enable
-
+filetype plugin indent on
 
 "" For fzf search
 ""nnoremap <silent> <C-f>     :Files<CR>
@@ -203,11 +204,6 @@ if has('nvim')
 endif
 
 
-
-
-
-
-
 " Neovim only
 if has('nvim')
     set termguicolors
@@ -239,6 +235,7 @@ set nu
 set mouse=a
 set ruler
 
+set list listchars=tab:\|_,trail:.
 
 
 " Auto Bracket
@@ -355,4 +352,5 @@ let g:lightline = {
 let g:blamer_enabled = 1
 " %a is the day of week, in case it's  needed
 let g:blamer_date_format = '%e %b %Y'
-highlight Blamer guifg=darkorange
+let g:blamer_prefix='                                                                         '
+highlight Blamer guifg=yellow
